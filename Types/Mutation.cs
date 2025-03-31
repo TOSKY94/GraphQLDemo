@@ -5,17 +5,12 @@ using HotChocolate.Subscriptions;
 namespace GraphQLDemo.Types;
 public class Mutation
 {
-    public async Task<Book> AddBook(Book book, [Service] BookRepository bookRepository, [Service] ITopicEventSender eventSender)
+    public async Task<Author> AddAuthor(Author author, [Service] AuthorRepository authorRepository, [Service] BookRepository bookRepository, [Service] ITopicEventSender eventSender)
     {
-        if (string.IsNullOrEmpty(book.Title) || string.IsNullOrEmpty(book.Author))
-        {
-            throw new GraphQLException("Title and Author are required.");
-        }
-
-        bookRepository.AddBook(book);
-
+        authorRepository.AddAuthor(author);
+        
         // Publish the event for onBookAdded subscription
-        await eventSender.SendAsync(nameof(Subscription.OnBookAdded), book);
-        return book;
+        await eventSender.SendAsync(nameof(Subscription.OnAuthorAdded), author);
+        return author;
     }
 }

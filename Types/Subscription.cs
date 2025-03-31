@@ -4,6 +4,6 @@ namespace GraphQLDemo.Types;
 public class Subscription
 {
     [Subscribe]
-    [Topic(nameof(OnBookAdded))]
-    public Book OnBookAdded([EventMessage] Book book) => book;
+    [Topic(nameof(OnAuthorAdded))]
+    public Author OnAuthorAdded([EventMessage] Author author) => author;
 }

@@ -9,10 +9,12 @@ builder.Services.AddGraphQLServer()
     .AddMutationType<Mutation>()
     .AddSubscriptionType<Subscription>()
     .AddInMemorySubscriptions()
+    .AddType<AuthorType>()
     .AddType<BookType>();
 
 // Add the BookRepository as a singleton service
 builder.Services.AddSingleton<BookRepository>();
+builder.Services.AddSingleton<AuthorRepository>();
 
 var app = builder.Build();
 
